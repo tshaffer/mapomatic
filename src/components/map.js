@@ -55,6 +55,11 @@ class Map extends Component {
         this.map.on('click', (event) => {
             console.log("map click");
             console.log(event);
+
+            const lat = event.lngLat.lat;
+            const lng = event.lngLat.lng;
+
+
         });
 
         this.map.on('load', function () {
