@@ -52,6 +52,11 @@ class Map extends Component {
 
         this.map.addControl(new window.mapboxgl.Navigation());
 
+        this.map.on('click', (event) => {
+            console.log("map click");
+            console.log(event);
+        });
+
         this.map.on('load', function () {
 
             // experiment on adding padding around bounds - instead of a fixed value, perhaps it should be a percentage based on bounds
@@ -176,6 +181,11 @@ class Map extends Component {
         }
     }
 
+    handleMouseDown(event) {
+        console.log("handleMouseDown");
+        console.log(event);
+    }
+
     render() {
 
         var self = this;
@@ -191,7 +201,9 @@ class Map extends Component {
                 ref={(c) => {
                     self.mapBoxMap = c;
                     self.loadAndRenderMap();
-                }}>
+                }}
+                onMouseDown={this.handleMouseDown}
+            >
             </div>
         );
     }
