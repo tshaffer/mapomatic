@@ -38,8 +38,8 @@ class Map extends Component {
 
         let minLatitude = 37.00198;
         let maxLatitude = 37.02391;
-        let minLongitude = -122.05154;
-        let maxLongitude = -122.08485;
+        let minLongitude = -122.08485;
+        let maxLongitude = -122.05154;
 
         const longitudeCenter = -122.068195;
         const latitudeCenter = 37.012945;
@@ -72,7 +72,7 @@ class Map extends Component {
                 maxLatitude
             ];
 
-            // self.map.fitBounds([minBounds, maxBounds]);
+            self.map.fitBounds([minBounds, maxBounds]);
 
 //             for (let segmentIndex = 0; segmentIndex < self.props.activitiesData.length; segmentIndex++) {
 //
