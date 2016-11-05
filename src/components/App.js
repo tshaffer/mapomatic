@@ -5,6 +5,8 @@ import React, { Component } from 'react';
 
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 
+import Map from './map';
+
 export default class App extends Component {
 
     componentDidMount() {
@@ -12,14 +14,19 @@ export default class App extends Component {
         console.log("app.js::componentDidMount invoked");
     }
 
+//     return (
+// <MuiThemeProvider>
+// <div>
+// MapOMatic
+// </div>
+// </MuiThemeProvider>
+// );
     render() {
 
         return (
-            <MuiThemeProvider>
-                <div>
-                    MapOMatic
-                </div>
-            </MuiThemeProvider>
+            <Map
+                mapHeight={"760px"}
+            />
         );
     }
 }
