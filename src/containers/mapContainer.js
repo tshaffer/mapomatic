@@ -1,4 +1,4 @@
-// import React from 'react';
+import React from 'react';
 import { connect } from 'react-redux';
 
 import Map from '../components/map';
@@ -27,6 +27,6 @@ const MapContainer = connect(
 
 export default MapContainer;
 
-// MapContainer.propTypes = {
-//     mapHeight: React.PropTypes.string.isRequired,
-// };
+MapContainer.propTypes = {
+    mapHeight: React.PropTypes.string.isRequired,
+};
