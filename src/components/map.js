@@ -145,7 +145,11 @@ class Map extends Component {
         console.log(event);
     }
 
+
     displayNearbySegments(nearbySegments) {
+
+        // other potential colours: brown
+        const strokeColors = ["red", "blue", "purple", "green", "orange", "pink", "yellow", "white", "maroon", "salmon"];
 
         console.log("pizza1");
         console.log("pizza2");
@@ -192,7 +196,7 @@ class Map extends Component {
                     "line-cap": "round",
                 },
                 "paint": {
-                    "line-color": 'red',
+                    "line-color": strokeColors[index],
                     "line-width": 2
                 }
             });
