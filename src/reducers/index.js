@@ -1,8 +1,8 @@
 import {combineReducers} from 'redux';
 import SegmentsReducer from './reducerSegments';
-import DBReducer from './reducer_db';
-import AthletesReducer from './reducer_athletes';
-import SelectedAthleteReducer from './reducer_selected_athlete';
+import DBReducer from './reducerDB';
+import AthletesReducer from './reducerAthletes';
+import SelectedAthleteReducer from './reducerSelecterAthlete';
 
 const rootReducer = combineReducers({
     db: DBReducer,
