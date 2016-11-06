@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 
-import * as Converters from '../utilities/converters';
 
 import { exploreSegments } from '../actions/index';
 
@@ -211,58 +210,10 @@ class Map extends Component {
         });
     }
 
-    buildNearbySegmentsList(nearbySegments) {
-
-        if (nearbySegments.length === 0) {
-            return (
-                <noscript/>
-            );
-        }
-
-        console.log("pizza1");
-        console.log("pizza2");
-
-        let nearbySegmentsList = nearbySegments.map( (nearbySegment, index) => {
-
-            console.log("distance");
-            console.log(nearbySegment.distance);
-            console.log(Converters.metersToMiles(nearbySegment.distance).toFixed(1), "mi");
-
-            console.log("grade");
-            console.log(nearbySegment.avg_grade.toFixed(1), "%");
-
-            console.log("elevation gain");
-            console.log(Converters.metersToFeet(nearbySegment.elev_difference).toFixed(0), "ft");
-
-            const nearbySegmentLabelStyle = {
-                color: this.strokeColors[index],
-            };
-
-            return (
-                <div key={index}>
-                    <div className="mapLegendActivityName">
-                        <span style={nearbySegmentLabelStyle}>{nearbySegment.name}</span>
-                    </div>
-                </div>
-            );
-        });
-
-        console.log("pizza1");
-        console.log("pizza2");
-
-        return (
-            <div>
-                { nearbySegmentsList }
-            </div>
-        );
-
-    }
-
     render() {
 
         var self = this;
 
-        const nearbySegmentsJSX = this.buildNearbySegmentsList(this.props.nearbySegments);
 
         if (!this.nearbySegmentsDisplayed && this.props.nearbySegments.length > 0) {
             this.displayNearbySegments(this.props.nearbySegments);
@@ -273,17 +224,12 @@ class Map extends Component {
         console.log("pizza2");
 
         return (
-            <div id="appDiv">
-                <div id="nearbySegmentList">
-                    { nearbySegmentsJSX }
-                </div>
-                <div id="mapBoxMap"
-                    ref={(c) => {
-                        self.mapBoxMap = c;
-                        self.loadAndRenderMap();
-                    }}
-                >
-                </div>
+            <div id="mapBoxMap"
+                ref={(c) => {
+                    self.mapBoxMap = c;
+                    self.loadAndRenderMap();
+                }}
+            >
             </div>
         );
     }
