@@ -10,6 +10,7 @@ class Map extends Component {
         super(props);
 
         this.map = null;
+        this.nearbySegmentsDisplayed = false;
     }
 
     initializeMap(mapId) {
@@ -67,7 +68,6 @@ class Map extends Component {
             const lngDelta = 0.0083275;
 
             // swLat, swLng, neLat, neLng
-
             const swLat = lat - latDelta;
             const swLng = lng - lngDelta;
             const neLat = lat + latDelta;
@@ -98,56 +98,6 @@ class Map extends Component {
 
             self.map.fitBounds([minBounds, maxBounds]);
 
-//             for (let segmentIndex = 0; segmentIndex < self.props.activitiesData.length; segmentIndex++) {
-//
-//                 let sourceName = "segment" + segmentIndex.toString();
-//                 let lineLayerName = "points" + segmentIndex.toString();
-//
-//                 const segmentData = self.props.activitiesData[segmentIndex];
-//
-//                 let pathToDecode = segmentData.polyline;
-//                 let ridePathDecoded = window.google.maps.geometry.encoding.decodePath(pathToDecode);
-//
-//                 let coordinates = [];
-//                 ridePathDecoded.forEach((location) => {
-//                     let longitude = location.lng();
-//                     let latitude = location.lat();
-//                     let lngLat = [longitude, latitude];
-//                     coordinates.push(lngLat);
-//                 });
-//
-//                 self.activityMap.addSource(sourceName, {
-//                     "type": "geojson",
-//                     "data": {
-//                         "type": "FeatureCollection",
-//                         "features": [{
-//                             "type": "Feature",
-//                             "geometry": {
-//                                 "type": "LineString",
-//                                 "coordinates": coordinates,
-//                             },
-//                             "properties": {
-//                                 "title": "segment" + segmentIndex.toString()
-//                             }
-//                         }]
-//                     }
-//                 });
-//
-//                 self.activityMap.addLayer({
-//                     "id": lineLayerName,
-//                     "type": "line",
-//                     "source": sourceName,
-//                     "layout": {
-//                         "line-join": "round",
-//                         "line-cap": "round",
-//                     },
-//                     "paint": {
-//                         "line-color": segmentData.strokeColor,
-//                         "line-width": 2
-//                     }
-//                 });
-//             }
-//
 // // create a GeoJSON point to serve as a starting point
 //             if (self.props.showMarker) {
 //                 let coordinates = [longitudeCenter, latitudeCenter];
@@ -179,16 +129,6 @@ class Map extends Component {
         if (this.map) return;
 
         let allDataLoaded = true;
-        // if (this.props.activitiesData.length == this.props.totalActivities) {
-        //     this.props.activitiesData.forEach( (activityData) => {
-        //         if (activityData.polyline == "") {
-        //             allDataLoaded = false;
-        //         }
-        //     });
-        // }
-        // else {
-        //     allDataLoaded = false;
-        // }
 
         if (this.mapBoxMap && allDataLoaded) {
 
@@ -203,6 +143,60 @@ class Map extends Component {
     handleMouseDown(event) {
         console.log("handleMouseDown");
         console.log(event);
+    }
+
+    displayNearbySegments(nearbySegments) {
+
+        console.log("pizza1");
+        console.log("pizza2");
+
+        nearbySegments.forEach( (nearbySegment, index) => {
+
+            const sourceName = "segment" + index.toString();
+            const lineLayerName = "points" + index.toString();
+
+            const pathToDecode = nearbySegment.points;
+            const ridePathDecoded = window.google.maps.geometry.encoding.decodePath(pathToDecode);
+
+            let coordinates = [];
+            ridePathDecoded.forEach((location) => {
+                let longitude = location.lng();
+                let latitude = location.lat();
+                let lngLat = [longitude, latitude];
+                coordinates.push(lngLat);
+            });
+
+            this.map.addSource(sourceName, {
+                "type": "geojson",
+                "data": {
+                    "type": "FeatureCollection",
+                    "features": [{
+                        "type": "Feature",
+                        "geometry": {
+                            "type": "LineString",
+                            "coordinates": coordinates,
+                        },
+                        "properties": {
+                            "title": "segment" + index.toString()
+                        }
+                    }]
+                }
+            });
+
+            this.map.addLayer({
+                "id": lineLayerName,
+                "type": "line",
+                "source": sourceName,
+                "layout": {
+                    "line-join": "round",
+                    "line-cap": "round",
+                },
+                "paint": {
+                    "line-color": 'red',
+                    "line-width": 2
+                }
+            });
+        });
     }
 
     buildNearbySegmentsJSX(nearbySegments) {
@@ -250,9 +244,15 @@ class Map extends Component {
 
         const nearbySegmentsJSX = this.buildNearbySegmentsJSX(this.props.nearbySegments);
 
+        if (!this.nearbySegmentsDisplayed && this.props.nearbySegments.length > 0) {
+            this.displayNearbySegments(this.props.nearbySegments);
+            this.nearbySegmentsDisplayed = true;
+        }
+
         console.log("pizza1");
         console.log("pizza2");
 
+        // { nearbySegmentsJSX }
 
         return (
             <div id="mapBoxMap"
@@ -260,9 +260,8 @@ class Map extends Component {
                     self.mapBoxMap = c;
                     self.loadAndRenderMap();
                 }}
-                 onMouseDown={this.handleMouseDown}
+                onMouseDown={this.handleMouseDown}
             >
-                { nearbySegmentsJSX }
             </div>
         );
     }
