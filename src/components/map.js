@@ -1,4 +1,8 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
+
+import { exploreSegments } from '../actions/index';
 
 class Map extends Component {
 
@@ -59,7 +63,17 @@ class Map extends Component {
             const lat = event.lngLat.lat;
             const lng = event.lngLat.lng;
 
+            const latDelta = 0.005;
+            const lngDelta = 0.0083275;
 
+            // swLat, swLng, neLat, neLng
+
+            const swLat = lat - latDelta;
+            const swLng = lng - lngDelta;
+            const neLat = lat + latDelta;
+            const neLng = lng + lngDelta;
+
+            this.props.exploreSegments(swLat, swLng, neLat, neLng);
         });
 
         this.map.on('load', function () {
@@ -214,9 +228,14 @@ class Map extends Component {
     }
 }
 
+function mapDispatchToProps(dispatch) {
+    return bindActionCreators({exploreSegments},
+        dispatch);
+}
+
+export default connect(null, mapDispatchToProps)(Map);
+
 Map.propTypes = {
-    mapHeight: React.PropTypes.string.isRequired
+    mapHeight: React.PropTypes.string.isRequired,
+    exploreSegments: React.PropTypes.func.isRequired
 };
-
-
-export default Map;

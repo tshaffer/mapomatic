@@ -1,6 +1,8 @@
 /**
  * Created by tedshaffer on 11/5/16.
  */
+const https = require('https');
+
 function getAthleteData(state = null) {
 
     let athleteData = {};
@@ -51,6 +53,19 @@ function fetchStravaData(endPoint, state) {
         }).on('error', function (err) {
             console.log('Caught exception: ' + err);
             reject(err);
+        });
+    });
+}
+
+
+export function fetchNearbySegments(swLat, swLng, neLat, neLng, getState) {
+    return new Promise((resolve, reject) => {
+
+        const url = "segments/explore?bounds=" + swLat + "," + swLng + "," + neLat + "," + neLng;
+        fetchStravaData(url, getState()).then( (stravaSegments) => {
+            console.log("pizza1");
+            console.log("pizza2");
+            resolve(stravaSegments);
         });
     });
 }
