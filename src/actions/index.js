@@ -32,8 +32,6 @@ export function exploreSegments(swLat, swLng, neLat, neLng) {
             //      starred - bool
             //      start_latlng
             //
-            console.log("pizza1");
-            console.log("pizza2");
 
             // dispatch nearbySegments to store in redux store
             dispatch(setNearbySegments(nearbySegments.segments));

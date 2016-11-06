@@ -19,9 +19,6 @@ class NearbySegments extends Component {
             );
         }
 
-        console.log("pizza1");
-        console.log("pizza2");
-
         let nearbySegmentsList = nearbySegments.map( (nearbySegment, index) => {
 
             console.log("distance");
@@ -47,9 +44,6 @@ class NearbySegments extends Component {
             );
         });
 
-        console.log("pizza1");
-        console.log("pizza2");
-
         return (
             <div>
                 { nearbySegmentsList }
@@ -63,9 +57,6 @@ class NearbySegments extends Component {
         var self = this;
 
         const nearbySegmentsJSX = this.buildNearbySegmentsList(this.props.nearbySegments);
-
-        console.log("pizza1");
-        console.log("pizza2");
 
         return (
             <div id="nearbySegmentList">

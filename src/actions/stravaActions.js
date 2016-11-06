@@ -63,8 +63,6 @@ export function fetchNearbySegments(swLat, swLng, neLat, neLng, getState) {
 
         const url = "segments/explore?bounds=" + swLat + "," + swLng + "," + neLat + "," + neLng;
         fetchStravaData(url, getState()).then( (stravaSegments) => {
-            console.log("pizza1");
-            console.log("pizza2");
             resolve(stravaSegments);
         });
     });

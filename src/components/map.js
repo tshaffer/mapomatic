@@ -92,8 +92,7 @@ export default class Map extends Component {
 
         if (this.mapBoxMap && allDataLoaded) {
 
-            // this.mapBoxMap.style.height = this.props.mapHeight;
-            this.mapBoxMap.style.height = "760px";
+            this.mapBoxMap.style.height = this.props.mapHeight;
 
             if (!this.map) {
                 this.initializeMap("mapBoxMap");
@@ -104,9 +103,6 @@ export default class Map extends Component {
     displayNearbySegments(nearbySegments) {
 
         // other potential colours: brown
-
-        console.log("pizza1");
-        console.log("pizza2");
 
         nearbySegments.forEach( (nearbySegment, index) => {
 
@@ -166,9 +162,6 @@ export default class Map extends Component {
             this.nearbySegmentsDisplayed = true;
         }
 
-        console.log("pizza1");
-        console.log("pizza2");
-
         return (
             <div id="mapBoxMap"
                 ref={(c) => {
@@ -183,7 +176,7 @@ export default class Map extends Component {
 }
 
 Map.propTypes = {
-    // mapHeight: React.PropTypes.string.isRequired,
+    mapHeight: React.PropTypes.string.isRequired,
     onExploreSegments: React.PropTypes.func.isRequired,
     nearbySegments: React.PropTypes.array.isRequired
 };

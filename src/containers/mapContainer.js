@@ -7,7 +7,8 @@ import { exploreSegments } from '../actions/index';
 
 function mapStateToProps (state, ownProps) {
     return {
-        nearbySegments: state.nearbySegments
+        nearbySegments: state.nearbySegments,
+        mapHeight: ownProps.mapHeight
     };
 }
 
