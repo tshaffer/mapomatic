@@ -1,11 +1,6 @@
 import React, { Component } from 'react';
-import { connect } from 'react-redux';
-import { bindActionCreators } from 'redux';
 
-
-import { exploreSegments } from '../actions/index';
-
-class Map extends Component {
+export default class Map extends Component {
 
     constructor(props) {
         super(props);
@@ -14,36 +9,11 @@ class Map extends Component {
         this.nearbySegmentsDisplayed = false;
 
         this.strokeColors = ["red", "blue", "purple", "green", "orange", "pink", "violet", "brown", "maroon", "salmon"];
-
     }
 
     initializeMap(mapId) {
 
         var self = this;
-
-        // let minLongitude = 9999;
-        // let maxLongitude = -9999;
-        // let minLatitude = 9999;
-        // let maxLatitude = -9999;
-
-        // for (let segmentIndex = 0; segmentIndex < self.props.activitiesData.length; segmentIndex++) {
-        //     let pathToDecode = self.props.activitiesData[segmentIndex].polyline;
-        //     let ridePathDecoded = window.google.maps.geometry.encoding.decodePath(pathToDecode);
-        //     ridePathDecoded.forEach((location) => {
-        //         let longitude = location.lng();
-        //         let latitude = location.lat();
-        //
-        //         if (longitude > maxLongitude) maxLongitude = longitude;
-        //         if (longitude < minLongitude) minLongitude = longitude;
-        //
-        //         if (latitude > maxLatitude) maxLatitude = latitude;
-        //         if (latitude < minLatitude) minLatitude = latitude;
-        //
-        //     });
-        // }
-        //
-        // const longitudeCenter = (minLongitude + maxLongitude) / 2.0;
-        // const latitudeCenter = (minLatitude + maxLatitude) / 2.0;
 
         let minLatitude = 37.00198;
         let maxLatitude = 37.02391;
@@ -77,7 +47,7 @@ class Map extends Component {
             const neLat = lat + latDelta;
             const neLng = lng + lngDelta;
 
-            this.props.exploreSegments(swLat, swLng, neLat, neLng);
+            this.props.onExploreSegments(swLat, swLng, neLat, neLng);
 
             const swBounds = [
                 swLng,
@@ -111,30 +81,6 @@ class Map extends Component {
             ];
 
             self.map.fitBounds([minBounds, maxBounds]);
-
-// // create a GeoJSON point to serve as a starting point
-//             if (self.props.showMarker) {
-//                 let coordinates = [longitudeCenter, latitudeCenter];
-//                 if (self.props.mapLatitudeLongitude && self.props.mapLatitudeLongitude.length > 0) {
-//                     coordinates = self.props.mapLatitudeLongitude;
-//                 }
-//                 self.markerPoint = {
-//                     "type": "Point",
-//                     "coordinates": coordinates
-//                 };
-//                 self.activityMap.addSource('markerLocation', { type: 'geojson', data: self.markerPoint });
-//
-//                 self.activityMap.addLayer({
-//                     "id": "markerCircle",
-//                     "type": "circle",
-//                     "source": "markerLocation",
-//                     "paint": {
-//                         "circle-radius": 8,
-//                         "circle-color": "red",
-//                         "circle-opacity": 0.8
-//                     }
-//                 });
-//             }
         });
     }
 
@@ -146,7 +92,8 @@ class Map extends Component {
 
         if (this.mapBoxMap && allDataLoaded) {
 
-            this.mapBoxMap.style.height = this.props.mapHeight;
+            // this.mapBoxMap.style.height = this.props.mapHeight;
+            this.mapBoxMap.style.height = "760px";
 
             if (!this.map) {
                 this.initializeMap("mapBoxMap");
@@ -214,7 +161,6 @@ class Map extends Component {
 
         var self = this;
 
-
         if (!this.nearbySegmentsDisplayed && this.props.nearbySegments.length > 0) {
             this.displayNearbySegments(this.props.nearbySegments);
             this.nearbySegmentsDisplayed = true;
@@ -232,25 +178,12 @@ class Map extends Component {
             >
             </div>
         );
+
     }
 }
 
-function mapStateToProps (state) {
-    return {
-        nearbySegments: state.nearbySegments
-    };
-}
-
-
-function mapDispatchToProps(dispatch) {
-    return bindActionCreators({exploreSegments},
-        dispatch);
-}
-
-export default connect(mapStateToProps, mapDispatchToProps)(Map);
-
 Map.propTypes = {
-    mapHeight: React.PropTypes.string.isRequired,
-    exploreSegments: React.PropTypes.func.isRequired,
+    // mapHeight: React.PropTypes.string.isRequired,
+    onExploreSegments: React.PropTypes.func.isRequired,
     nearbySegments: React.PropTypes.array.isRequired
 };

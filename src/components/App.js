@@ -9,7 +9,7 @@ import DBServices from '../services/dbServices';
 
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 
-import Map from './map';
+import MapContainer from '../containers/mapContainer';
 import NearbySegments from './nearbySegments';
 
 // import { setSelectedAthlete } from '../actions/index';
@@ -60,16 +60,12 @@ class App extends Component {
             selectedAthlete = this.props.athletes[0];
         }
 
-        // return (
-        //     <Map
-        //         mapHeight={"760px"}
-        //     />
-        // );
-
         return (
             <div id="appDiv">
-                <NearbySegments/>
-                <Map mapHeight={"760px"}/>
+                <NearbySegments nearbySegments={[]}/>
+                <MapContainer
+                    mapHeight={"760px"}
+                />
             </div>
         );
     }
