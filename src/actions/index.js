@@ -5,7 +5,7 @@ import { fetchNearbySegments } from './stravaActions';
 
 export const SET_SELECTED_ATHLETE = 'SET_SELECTED_ATHLETE';
 export const CLEAR_SEGMENTS = 'CLEAR_SEGMENTS';
-
+export const SET_NEARBY_SEGMENTS = 'SET_NEARBY_SEGMENTS';
 
 export function setSelectedAthlete(athlete) {
     return {
@@ -31,11 +31,19 @@ export function exploreSegments(swLat, swLng, neLat, neLng) {
             //      points - string - polyline?
             //      starred - bool
             //      start_latlng
-            //  
+            //
             console.log("pizza1");
             console.log("pizza2");
 
             // dispatch nearbySegments to store in redux store
+            dispatch(setNearbySegments(nearbySegments.segments));
         });
+    };
+}
+
+export function setNearbySegments(nearbySegments) {
+    return {
+        type: SET_NEARBY_SEGMENTS,
+        nearbySegments
     };
 }

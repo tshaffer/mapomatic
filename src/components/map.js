@@ -205,6 +205,39 @@ class Map extends Component {
         console.log(event);
     }
 
+    buildNearbySegmentsJSX(nearbySegments) {
+
+        if (nearbySegments.length === 0) {
+            return (
+                <noscript/>
+            );
+        }
+
+        console.log("pizza1");
+        console.log("pizza2");
+
+        let nearbySegmentsList = nearbySegments.map( (nearbySegment, index) => {
+
+            return (
+                <div key={index}>
+                    <div className="mapLegendActivityName">
+                        { nearbySegment.name }
+                    </div>
+                </div>
+            );
+        });
+
+        console.log("pizza1");
+        console.log("pizza2");
+
+        return (
+            <div>
+                { nearbySegmentsList }
+            </div>
+        );
+
+    }
+
     render() {
 
         var self = this;
@@ -215,27 +248,42 @@ class Map extends Component {
 
         // const mapLegendJSX = this.buildMapLegend(this.props.activitiesData);
 
+        const nearbySegmentsJSX = this.buildNearbySegmentsJSX(this.props.nearbySegments);
+
+        console.log("pizza1");
+        console.log("pizza2");
+
+
         return (
             <div id="mapBoxMap"
                 ref={(c) => {
                     self.mapBoxMap = c;
                     self.loadAndRenderMap();
                 }}
-                onMouseDown={this.handleMouseDown}
+                 onMouseDown={this.handleMouseDown}
             >
+                { nearbySegmentsJSX }
             </div>
         );
     }
 }
+
+function mapStateToProps (state) {
+    return {
+        nearbySegments: state.nearbySegments
+    };
+}
+
 
 function mapDispatchToProps(dispatch) {
     return bindActionCreators({exploreSegments},
         dispatch);
 }
 
-export default connect(null, mapDispatchToProps)(Map);
+export default connect(mapStateToProps, mapDispatchToProps)(Map);
 
 Map.propTypes = {
     mapHeight: React.PropTypes.string.isRequired,
-    exploreSegments: React.PropTypes.func.isRequired
+    exploreSegments: React.PropTypes.func.isRequired,
+    nearbySegments: React.PropTypes.array.isRequired
 };
