@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 
+import * as Converters from '../utilities/converters';
+
 import { exploreSegments } from '../actions/index';
 
 class Map extends Component {
@@ -215,7 +217,7 @@ class Map extends Component {
         });
     }
 
-    buildNearbySegmentsJSX(nearbySegments) {
+    buildNearbySegmentsList(nearbySegments) {
 
         if (nearbySegments.length === 0) {
             return (
@@ -227,6 +229,16 @@ class Map extends Component {
         console.log("pizza2");
 
         let nearbySegmentsList = nearbySegments.map( (nearbySegment, index) => {
+
+            console.log("distance");
+            console.log(nearbySegment.distance);
+            console.log(Converters.metersToMiles(nearbySegment.distance).toFixed(1), "mi");
+
+            console.log("grade");
+            console.log(nearbySegment.avg_grade.toFixed(1), "%");
+
+            console.log("elevation gain");
+            console.log(Converters.metersToFeet(nearbySegment.elev_difference).toFixed(0), "ft");
 
             const nearbySegmentLabelStyle = {
                 color: this.strokeColors[index],
@@ -256,7 +268,7 @@ class Map extends Component {
 
         var self = this;
 
-        const nearbySegmentsJSX = this.buildNearbySegmentsJSX(this.props.nearbySegments);
+        const nearbySegmentsJSX = this.buildNearbySegmentsList(this.props.nearbySegments);
 
         if (!this.nearbySegmentsDisplayed && this.props.nearbySegments.length > 0) {
             this.displayNearbySegments(this.props.nearbySegments);
