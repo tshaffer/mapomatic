@@ -11,7 +11,7 @@ import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 
 import Map from './map';
 
-import { setSelectedAthlete } from '../actions/index';
+// import { setSelectedAthlete } from '../actions/index';
 import { loadDBData } from '../actions/dbActions';
 
 import { objectPopulated, arrayPopulated } from '../utilities/utils';
@@ -76,14 +76,14 @@ function mapStateToProps (state) {
 }
 
 function mapDispatchToProps(dispatch) {
-    return bindActionCreators({loadDBData, setSelectedAthlete},
+    return bindActionCreators({loadDBData},
         dispatch);
 }
 
 App.propTypes = {
     db: React.PropTypes.object.isRequired,
     athletes: React.PropTypes.array.isRequired,
-    setSelectedAthlete: React.PropTypes.func.isRequired,
+    // setSelectedAthlete: React.PropTypes.func.isRequired,
     selectedAthlete: React.PropTypes.object.isRequired
 };
 

@@ -155,12 +155,6 @@ class Map extends Component {
         }
     }
 
-    handleMouseDown(event) {
-        console.log("handleMouseDown");
-        console.log(event);
-    }
-
-
     displayNearbySegments(nearbySegments) {
 
         // other potential colours: brown
@@ -247,7 +241,7 @@ class Map extends Component {
             return (
                 <div key={index}>
                     <div className="mapLegendActivityName">
-                        <span style={ nearbySegmentLabelStyle }>{ nearbySegment.name }</span>
+                        <span style={nearbySegmentLabelStyle}>{nearbySegment.name}</span>
                     </div>
                 </div>
             );
@@ -284,11 +278,10 @@ class Map extends Component {
                     { nearbySegmentsJSX }
                 </div>
                 <div id="mapBoxMap"
-                     ref={(c) => {
-                         self.mapBoxMap = c;
-                         self.loadAndRenderMap();
-                     }}
-                     onMouseDown={this.handleMouseDown}
+                    ref={(c) => {
+                        self.mapBoxMap = c;
+                        self.loadAndRenderMap();
+                    }}
                 >
                 </div>
             </div>

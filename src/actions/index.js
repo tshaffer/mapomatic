@@ -41,7 +41,7 @@ export function exploreSegments(swLat, swLng, neLat, neLng) {
     };
 }
 
-export function setNearbySegments(nearbySegments) {
+function setNearbySegments(nearbySegments) {
     return {
         type: SET_NEARBY_SEGMENTS,
         nearbySegments
