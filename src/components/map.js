@@ -77,6 +77,16 @@ class Map extends Component {
             const neLng = lng + lngDelta;
 
             this.props.exploreSegments(swLat, swLng, neLat, neLng);
+
+            const swBounds = [
+                swLng,
+                swLat
+            ];
+            const neBounds = [
+                neLng,
+                neLat
+            ];
+            this.map.fitBounds([swBounds, neBounds]);
         });
 
         this.map.on('load', function () {
