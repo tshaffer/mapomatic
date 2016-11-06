@@ -11,6 +11,9 @@ class Map extends Component {
 
         this.map = null;
         this.nearbySegmentsDisplayed = false;
+
+        this.strokeColors = ["red", "blue", "purple", "green", "orange", "pink", "violet", "brown", "maroon", "salmon"];
+
     }
 
     initializeMap(mapId) {
@@ -149,7 +152,6 @@ class Map extends Component {
     displayNearbySegments(nearbySegments) {
 
         // other potential colours: brown
-        const strokeColors = ["red", "blue", "purple", "green", "orange", "pink", "yellow", "white", "maroon", "salmon"];
 
         console.log("pizza1");
         console.log("pizza2");
@@ -196,7 +198,7 @@ class Map extends Component {
                     "line-cap": "round",
                 },
                 "paint": {
-                    "line-color": strokeColors[index],
+                    "line-color": this.strokeColors[index],
                     "line-width": 2
                 }
             });
@@ -216,10 +218,14 @@ class Map extends Component {
 
         let nearbySegmentsList = nearbySegments.map( (nearbySegment, index) => {
 
+            const nearbySegmentLabelStyle = {
+                color: this.strokeColors[index],
+            };
+
             return (
                 <div key={index}>
                     <div className="mapLegendActivityName">
-                        { nearbySegment.name }
+                        <span style={ nearbySegmentLabelStyle }>{ nearbySegment.name }</span>
                     </div>
                 </div>
             );
@@ -240,12 +246,6 @@ class Map extends Component {
 
         var self = this;
 
-        // if (this.activityMap && this.props.showMarker && this.props.mapLatitudeLongitude && this.props.mapLatitudeLongitude.length > 0) {
-        //     this.setMarkerPosition();
-        // }
-
-        // const mapLegendJSX = this.buildMapLegend(this.props.activitiesData);
-
         const nearbySegmentsJSX = this.buildNearbySegmentsJSX(this.props.nearbySegments);
 
         if (!this.nearbySegmentsDisplayed && this.props.nearbySegments.length > 0) {
@@ -256,12 +256,10 @@ class Map extends Component {
         console.log("pizza1");
         console.log("pizza2");
 
-        // { nearbySegmentsJSX }
-
         return (
             <div id="appDiv">
                 <div id="nearbySegmentList">
-                    Nearby segments
+                    { nearbySegmentsJSX }
                 </div>
                 <div id="mapBoxMap"
                      ref={(c) => {
