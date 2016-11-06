@@ -60,9 +60,14 @@ class App extends Component {
         }
 
         return (
-            <Map
-                mapHeight={"760px"}
-            />
+            <div id="appDiv">
+                <div id="leftDiv">
+                    Nearby segments
+                </div>
+                <Map
+                    mapHeight={"760px"}
+                />
+            </div>
         );
     }
 }

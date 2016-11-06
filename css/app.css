@@ -6,6 +6,19 @@ body {
     /*padding:0;*/
 }
 
+#appDiv {
+    width: 100%;
+    overflow: hidden;
+}
+
+#leftDiv {
+    width: 200px;
+    float: left;
+}
+
+#mapBoxMap {
+    margin-left: 200px;
+}
 /*#mapBoxMap { position:absolute; top:0; bottom:0; width:100%; }*/
 
 table,th,td

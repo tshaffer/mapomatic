@@ -1,7 +1,7 @@
 /**
  * Created by tedshaffer on 6/3/16.
  */
-console.log("Mapomatic");
+console.log("mapomatic");
 const path = require('path')
 
 const electron = require('electron');
