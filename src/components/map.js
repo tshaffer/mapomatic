@@ -259,13 +259,18 @@ class Map extends Component {
         // { nearbySegmentsJSX }
 
         return (
-            <div id="mapBoxMap"
-                ref={(c) => {
-                    self.mapBoxMap = c;
-                    self.loadAndRenderMap();
-                }}
-                onMouseDown={this.handleMouseDown}
-            >
+            <div id="appDiv">
+                <div id="nearbySegmentList">
+                    Nearby segments
+                </div>
+                <div id="mapBoxMap"
+                     ref={(c) => {
+                         self.mapBoxMap = c;
+                         self.loadAndRenderMap();
+                     }}
+                     onMouseDown={this.handleMouseDown}
+                >
+                </div>
             </div>
         );
     }

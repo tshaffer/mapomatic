@@ -11,7 +11,7 @@ body {
     overflow: hidden;
 }
 
-#leftDiv {
+#nearbySegmentList {
     width: 200px;
     float: left;
 }
