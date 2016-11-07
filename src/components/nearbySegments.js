@@ -8,7 +8,9 @@ class NearbySegments extends Component {
     constructor(props) {
         super(props);
 
-        this.strokeColors = ["red", "blue", "purple", "green", "orange", "pink", "violet", "brown", "maroon", "salmon"];
+        // http://phrogz.net/css/distinct-colors.html
+        // this.strokeColors = ["red", "blue", "purple", "green", "orange", "pink", "violet", "brown", "maroon", "salmon"];
+        this.strokeColors = ["#ff0000", "#0088ff", "#cc00ff", "#ffcc00", "#400000", "#a65369", "#000059", "#ffc480", "#ff8800", "#8da629"];
     }
 
     buildNearbySegmentsList(nearbySegments) {
@@ -21,24 +23,29 @@ class NearbySegments extends Component {
 
         let nearbySegmentsList = nearbySegments.map( (nearbySegment, index) => {
 
-            console.log("distance");
-            console.log(nearbySegment.distance);
-            console.log(Converters.metersToMiles(nearbySegment.distance).toFixed(1), "mi");
-
-            console.log("grade");
-            console.log(nearbySegment.avg_grade.toFixed(1), "%");
+            const distanceLbl = Converters.metersToMiles(nearbySegment.distance).toFixed(1) + "mi";
+            const gradeLbl = nearbySegment.avg_grade.toFixed(1) + "%";
 
             console.log("elevation gain");
             console.log(Converters.metersToFeet(nearbySegment.elev_difference).toFixed(0), "ft");
 
-            const nearbySegmentLabelStyle = {
+            const nearbySegmentTitleStyle = {
                 color: this.strokeColors[index],
+                fontWeight: 'bold'
+            };
+
+            const nearbySegmentAttrsStyle = {
+                color: this.strokeColors[index],
+                fontWeight: 'normal',
+                marginLeft: '8px'
             };
 
             return (
                 <div key={index}>
                     <div className="mapLegendActivityName">
-                        <span style={nearbySegmentLabelStyle}>{nearbySegment.name}</span>
+                        <span style={nearbySegmentTitleStyle}>{nearbySegment.name}</span>
+                        <br/>
+                        <span style={nearbySegmentAttrsStyle}>{distanceLbl} {gradeLbl}</span>
                     </div>
                 </div>
             );

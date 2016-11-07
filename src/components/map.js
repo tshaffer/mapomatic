@@ -8,7 +8,9 @@ export default class Map extends Component {
         this.map = null;
         this.nearbySegmentsDisplayed = false;
 
-        this.strokeColors = ["red", "blue", "purple", "green", "orange", "pink", "violet", "brown", "maroon", "salmon"];
+        // http://phrogz.net/css/distinct-colors.html
+        // this.strokeColors = ["red", "blue", "purple", "green", "orange", "pink", "violet", "brown", "maroon", "salmon"];
+        this.strokeColors = ["#ff0000", "#0088ff", "#cc00ff", "#ffcc00", "#400000", "#a65369", "#000059", "#ffc480", "#ff8800", "#8da629"];
     }
 
     initializeMap(mapId) {
